@@ -27,6 +27,7 @@ public class work extends JPanel implements ActionListener,KeyListener{
     private int WIDTH=500;
     private int HEIGHT=700;
     private int move = 20;
+    private int count=1;
     private ArrayList<Rectangle>ocars;//for opponent cars
     private Rectangle car;
     private Random rand;
@@ -86,8 +87,15 @@ public class work extends JPanel implements ActionListener,KeyListener{
     }
     public void actionPerformed(ActionEvent e){
         Rectangle rect;
+        count++;
         for(int i=0;i<ocars.size();i++){
             rect=ocars.get(i);
+            if(count%1000==0){
+                speed++;
+                if(move<50){
+                    move+=10;
+                }
+            }
             rect.y+=speed;
         }
         //car crashing with oponents
@@ -130,7 +138,7 @@ public class work extends JPanel implements ActionListener,KeyListener{
          }
     }
     public void moveright(){
-         if(car.y+move>WIDTH/2+10){
+         if(car.x+move>WIDTH/2+10){
              System.out.println("\b");
          }else{
              car.x+= move;
@@ -151,7 +159,15 @@ public class work extends JPanel implements ActionListener,KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
       //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-      
+      int key=e.getKeyCode();
+      switch(key){
+          case KeyEvent.VK_UP -> moveup();
+          case KeyEvent.VK_DOWN -> movedown();
+          case KeyEvent.VK_LEFT -> moveleft();
+          case KeyEvent.VK_RIGHT -> moveright();
+          default -> {
+            }
+      }
     }
     
 }
