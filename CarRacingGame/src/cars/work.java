@@ -6,8 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 /*
@@ -31,8 +35,12 @@ public class work extends JPanel implements ActionListener,KeyListener{
     private ArrayList<Rectangle>ocars;//for opponent cars
     private Rectangle car;
     private Random rand;
+    BufferedImage bg;
+    BufferedImage road;
     Timer t;
-    public work(){
+    public work() throws IOException{
+        bg=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\bg.jpeg"));
+        road=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\road.jpeg"));
         t = new Timer(20,this);
         rand=new Random();
         ocars=new ArrayList<Rectangle>();
@@ -71,13 +79,12 @@ public class work extends JPanel implements ActionListener,KeyListener{
     }
     public void paintComponent(Graphics g){
         super.paintComponents(g);
-        g.setColor(Color.cyan);
-        g.fillRect(0,0,WIDTH,HEIGHT);
-        g.setColor(Color.gray);
-        g.fillRect(WIDTH/2-100,0,200,HEIGHT);
+        g.drawImage(bg,0,0,null);
+        g.drawImage(road, WIDTH/2-125, 0, null);
+        g.setColor(Color.white);
         g.setColor(Color.red);
         g.fillRect(car.x, car.y, car.width, car.height);
-        g.setColor(Color.blue);
+        
         g.drawLine(WIDTH/2,0,WIDTH/2,HEIGHT);
         g.setColor(Color.MAGENTA);
         for(Rectangle rect:ocars){
