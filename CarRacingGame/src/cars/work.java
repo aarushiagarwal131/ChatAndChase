@@ -40,17 +40,25 @@ public class work extends JPanel implements ActionListener,KeyListener{
     private Random rand;
     BufferedImage bg;
     BufferedImage road;
+     BufferedImage user;
+      BufferedImage op1;
+       BufferedImage op2;
+       
+    
     Boolean linef=true;
     Timer t;
     public work() throws IOException{
-        bg=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\bg.jpeg"));
-        road=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\road.png"));
+        user = ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\user1.png"));
+         op1 = ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\op1.png"));
+         op2 = ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\op2.png"));
+        bg=ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\bg.jpeg"));
+        road=ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\road.png"));
         t = new Timer(20,this);
         rand=new Random();
         ocars=new ArrayList<Rectangle>();
         line = new ArrayList<Rectangle>();
         car=new Rectangle(WIDTH/2-90,HEIGHT-100,width,height);
-        space=300;
+        space=500;
         speed=2;
         addKeyListener(this);
         setFocusable(true);
@@ -58,14 +66,14 @@ public class work extends JPanel implements ActionListener,KeyListener{
         addocars(true);
         addocars(true);
         addocars(true);
+       addlines(true);
+         addlines(true);
         addlines(true);
-        addlines(true);
-        addlines(true);
-        addlines(true);
-        addlines(true);
-        addlines(true);
-        addlines(true);
-        addlines(true);
+         addlines(true);
+         addlines(true);
+         addlines(true);
+         addlines(true);
+         addlines(true);
         
         t.start();
     }
@@ -89,7 +97,7 @@ public class work extends JPanel implements ActionListener,KeyListener{
         int Height=height;
         if(positionx==0)
         {
-            x=WIDTH/2-90;//cars will be appearing either from right side or from left side
+            x=WIDTH/2-100;//cars will be appearing either from right side or from left side
         }
         else {
             x=WIDTH/2+10;
@@ -112,13 +120,16 @@ public class work extends JPanel implements ActionListener,KeyListener{
         }
         
      
-          g.drawLine(WIDTH/2,0,WIDTH/2,HEIGHT);
-          
-        g.setColor(Color.red);
-        g.fillRect(car.x, car.y, car.width, car.height);
-        
+          //g.drawLine(WIDTH/2,0,WIDTH/2,HEIGHT);
+          g.drawImage(user,car.x,car.y,null);
+      
         g.setColor(Color.MAGENTA);
         for(Rectangle rect:ocars){
+            if(rand.nextInt()%2 ==0){
+               g.drawImage(op1,rect.x,rect.y,null);
+            }else{
+                g.drawImage(op2,rect.x,rect.y,null);
+            }
             g.fillRect(rect.x,rect.y,rect.width,rect.height);
         }
        
