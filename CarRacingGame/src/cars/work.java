@@ -1,6 +1,8 @@
 package cars;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,17 +35,20 @@ public class work extends JPanel implements ActionListener,KeyListener{
     private int move = 20;
     private int count=1;
     private ArrayList<Rectangle>ocars;//for opponent cars
+     private ArrayList<Rectangle> line;
     private Rectangle car;
     private Random rand;
     BufferedImage bg;
     BufferedImage road;
+    Boolean linef=true;
     Timer t;
     public work() throws IOException{
         bg=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\bg.jpeg"));
-        road=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\road.jpeg"));
+        road=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\road.png"));
         t = new Timer(20,this);
         rand=new Random();
         ocars=new ArrayList<Rectangle>();
+        line = new ArrayList<Rectangle>();
         car=new Rectangle(WIDTH/2-90,HEIGHT-100,width,height);
         space=300;
         speed=2;
@@ -53,9 +58,28 @@ public class work extends JPanel implements ActionListener,KeyListener{
         addocars(true);
         addocars(true);
         addocars(true);
-       
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
         
         t.start();
+    }
+    public void addlines(boolean first){
+        int x=WIDTH/2-2;
+        int y =700;
+        int width=4;
+        int height = 100;
+        int sp = 130;
+        if(first){
+            line.add(new Rectangle(x,y-(line.size()*space),width,height));
+        } else{
+            line.add(new Rectangle(x,line.get(line.size()-1).y-space,width,height));
+                    }
     }
     public void addocars(boolean first){
         int positionx=rand.nextInt()%2;
@@ -79,13 +103,20 @@ public class work extends JPanel implements ActionListener,KeyListener{
     }
     public void paintComponent(Graphics g){
         super.paintComponents(g);
+      
         g.drawImage(bg,0,0,null);
         g.drawImage(road, WIDTH/2-125, 0, null);
-        g.setColor(Color.white);
+       g.setColor(Color.WHITE);
+        for(Rectangle rect:ocars){
+            g.fillRect(rect.x,rect.y,rect.width,rect.height);
+        }
+        
+     
+          g.drawLine(WIDTH/2,0,WIDTH/2,HEIGHT);
+          
         g.setColor(Color.red);
         g.fillRect(car.x, car.y, car.width, car.height);
         
-        g.drawLine(WIDTH/2,0,WIDTH/2,HEIGHT);
         g.setColor(Color.MAGENTA);
         for(Rectangle rect:ocars){
             g.fillRect(rect.x,rect.y,rect.width,rect.height);
@@ -98,8 +129,8 @@ public class work extends JPanel implements ActionListener,KeyListener{
         for(int i=0;i<ocars.size();i++){
             rect=ocars.get(i);
             if(count%1000==0){
-                speed++;
-                if(move<50){
+                if(move<10){
+                    speed++;
                     move+=10;
                 }
             }
@@ -118,6 +149,24 @@ public class work extends JPanel implements ActionListener,KeyListener{
               addocars(false);
           }
         }
+         for(int i=0;i<line.size();i++){
+            rect=line.get(i);
+            if(count%1000==0){
+                speed++;
+                
+            }
+            rect.y+=speed;
+        }
+        
+        for(int i=0;i<line.size();i++){
+          rect = line.get(i);
+          if(rect.y > HEIGHT){
+              line.remove(rect);
+            
+              addlines(false);
+          }
+        }
+        
         repaint();
     }
     
