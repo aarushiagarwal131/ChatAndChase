@@ -31,7 +31,7 @@ public class work extends JPanel implements ActionListener,KeyListener{
     private int height=90;
     private int speed;
     private int WIDTH=500;
-    private int HEIGHT=700;
+    private int HEIGHT=720;
     private int move = 20;
     private int count=1;
     private ArrayList<Rectangle>ocars;//for opponent cars
@@ -43,22 +43,20 @@ public class work extends JPanel implements ActionListener,KeyListener{
      BufferedImage user;
       BufferedImage op1;
        BufferedImage op2;
-       
     
-    Boolean linef=true;
     Timer t;
     public work() throws IOException{
-        user = ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\user1.png"));
-         op1 = ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\op1.png"));
-         op2 = ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\op2.png"));
-        bg=ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\bg.jpeg"));
-        road=ImageIO.read(new File("C:\\Users\\HP\\Desktop\\CarRacing\\src\\cars\\road.png"));
+        user = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Desktop\\CarRacingGame\\src\\cars\\mycar.png"));
+         op1 = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Desktop\\CarRacingGame\\src\\cars\\mycar3.png"));
+         op2 = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Desktop\\CarRacingGame\\src\\cars\\mycar3.png"));
+        bg=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\bg.jpeg"));
+        road=ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\road.png"));
         t = new Timer(20,this);
         rand=new Random();
         ocars=new ArrayList<Rectangle>();
         line = new ArrayList<Rectangle>();
-        car=new Rectangle(WIDTH/2-90,HEIGHT-100,width,height);
-        space=500;
+        car=new Rectangle(WIDTH/2-105,HEIGHT-100,width,height);
+        space=800;
         speed=2;
         addKeyListener(this);
         setFocusable(true);
@@ -66,14 +64,14 @@ public class work extends JPanel implements ActionListener,KeyListener{
         addocars(true);
         addocars(true);
         addocars(true);
-       addlines(true);
-         addlines(true);
         addlines(true);
-         addlines(true);
-         addlines(true);
-         addlines(true);
-         addlines(true);
-         addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
+        addlines(true);
         
         t.start();
     }
@@ -97,10 +95,10 @@ public class work extends JPanel implements ActionListener,KeyListener{
         int Height=height;
         if(positionx==0)
         {
-            x=WIDTH/2-100;//cars will be appearing either from right side or from left side
+            x=WIDTH/2-110;//cars will be appearing either from right side or from left side
         }
         else {
-            x=WIDTH/2+10;
+            x=WIDTH/2+60;
         }
         if(first){
             ocars.add(new Rectangle(x,y-100-(ocars.size()*space),Width,Height));
@@ -114,9 +112,9 @@ public class work extends JPanel implements ActionListener,KeyListener{
       
         g.drawImage(bg,0,0,null);
         g.drawImage(road, WIDTH/2-125, 0, null);
-       g.setColor(Color.WHITE);
+      // g.setColor(Color.WHITE);
         for(Rectangle rect:ocars){
-            g.fillRect(rect.x,rect.y,rect.width,rect.height);
+            //g.fillRect(rect.x,rect.y,rect.width,rect.height);
         }
         
      
@@ -130,7 +128,7 @@ public class work extends JPanel implements ActionListener,KeyListener{
             }else{
                 g.drawImage(op2,rect.x,rect.y,null);
             }
-            g.fillRect(rect.x,rect.y,rect.width,rect.height);
+            //g.fillRect(rect.x,rect.y,rect.width,rect.height);
         }
        
     }
@@ -198,7 +196,7 @@ public class work extends JPanel implements ActionListener,KeyListener{
          }
     }
  public void moveleft(){
-         if(car.x-move<WIDTH/2-90){
+         if(car.x-move<WIDTH/2-124){
              System.out.println("\b");
          }else{
              car.x-= move;
