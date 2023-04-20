@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 /*
@@ -136,6 +138,10 @@ public class work extends JPanel implements ActionListener, KeyListener {
     for (Rectangle r: ocars) {
       if (r.intersects(car)) {
         car.y = r.y + height;
+        if(car.y>HEIGHT+5){
+                JOptionPane.showMessageDialog(null, "YOU LOSE! Game Over");
+                System.exit(0);
+        }
       }
     }
     for (int i = 0; i < ocars.size(); i++) {
@@ -168,6 +174,14 @@ public class work extends JPanel implements ActionListener, KeyListener {
 
   //moving up
   public void moveup() {
+    if(car.y==15){
+         JOptionPane.showMessageDialog(null, "YOU WON!");
+         System.exit(0);
+    }
+    if(car.y>HEIGHT+1){
+        JOptionPane.showMessageDialog(null, "YOU LOSE! Game Over");
+         System.exit(0);
+    }
     if (car.y - move < 0) {
       System.out.println("\b");
     } else {
