@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.io.File;
+import javax.swing.JLabel;
 class MusicThread extends Thread {
+    
   private static void PlayMusic(String location) {
 
     try {
@@ -43,7 +45,7 @@ public class Cars extends JFrame {
   public static void main(String args[]) throws IOException {
 
     JOptionPane.showMessageDialog(null, "LET'S PLAY!");
-    JFrame app = new JFrame();
+    JFrame app = new JFrame("ASSETTO CORSA");
     MusicThread mt = new MusicThread();
     mt.start();
     work w = new work();
