@@ -35,7 +35,6 @@ implements ActionListener {
   private JButton play;
   private JTextArea tout;
   private JLabel res;
-  private JTextArea resadd;
 
   private String dates[] = {
     "1",
@@ -259,14 +258,6 @@ implements ActionListener {
     res.setLocation(100, 500);
     c.add(res);
     res.setForeground(Color.WHITE);
-
-    resadd = new JTextArea();
-    resadd.setFont(new Font("Arial", Font.PLAIN, 15));
-    resadd.setSize(200, 75);
-    resadd.setLocation(580, 175);
-    resadd.setLineWrap(true);
-    c.add(resadd);
-
     setVisible(true);
   }
 
@@ -301,22 +292,23 @@ implements ActionListener {
         res.setText("Let's play..");
       } else {
         tout.setText("");
-        resadd.setText("");
         res.setText("Please accept the" +
           " terms & conditions..");
       }
     } else if (e.getSource() == play) {
-      JOptionPane.showMessageDialog(null, "LET'S PLAY!");
-      setVisible(false);
-      Cars c = new Cars();
-      try {
-        c.execute();
-      } catch (IOException ex) {
-        Logger.getLogger(MyFrame.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (InterruptedException ex) {
-        Logger.getLogger(MyFrame.class.getName()).log(Level.SEVERE, null, ex);
+      if (term.isSelected()) {
+        JOptionPane.showMessageDialog(null, "LET'S PLAY!");
+        setVisible(false);
+        try {
+          Cars.execute();
+        } catch (IOException | InterruptedException ex) {
+          Logger.getLogger(MyFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      } else {
+        tout.setText("");
+        res.setText("Please accept the" +
+          " terms & conditions..");
       }
-
     }
   }
 }
@@ -324,9 +316,12 @@ implements ActionListener {
 // Driver Code
 class Test {
 
-  public static void main(String args[]) {
+  public static void caller() {
     MusicThread mt = new MusicThread();
     mt.start();
     MyFrame f = new MyFrame();
+  }
+  public static void main(String args[]) {
+    Test.caller();
   }
 }
