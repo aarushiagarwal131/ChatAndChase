@@ -1,12 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author HP
- */
 package cars;
 import javax.swing.JFrame;
 import javax.sound.sampled.*;
@@ -40,7 +31,7 @@ class MusicThread extends Thread {
 }
 public class Cars extends JFrame {
 
-  public void execute() throws IOException, InterruptedException {
+  public static void execute() throws IOException, InterruptedException {
 
     JFrame app = new JFrame("ASSETTO CORSA");
     work w = new work();
@@ -48,6 +39,9 @@ public class Cars extends JFrame {
     app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     app.setSize(650, 720);
     app.setVisible(true);
+  }
+  public static void main(String args[]) throws IOException, InterruptedException {
+    Cars.execute();
   }
 
 }
