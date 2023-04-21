@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -49,15 +48,15 @@ public class work extends JPanel implements ActionListener, KeyListener {
     user = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Desktop\\CarRacingGame\\src\\cars\\mycarsmall.png"));
     op1 = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Desktop\\CarRacingGame\\src\\cars\\mycar3small.png"));
     op2 = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Desktop\\CarRacingGame\\src\\cars\\mycar3small.png"));
-    bg = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\bg.jpeg"));
-    road = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Documents\\NetBeansProjects\\CarRacingGame\\src\\cars\\road.png"));
+    bg = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Desktop\\CarRacingGame\\src\\cars\\bg.jpeg"));
+    road = ImageIO.read(new File("C:\\Users\\HP\\OneDrive - nitj.ac.in\\Desktop\\CarRacingGame\\src\\cars\\road.png"));
     t = new Timer(20, this);
     rand = new Random();
     ocars = new ArrayList < Rectangle > ();
     line = new ArrayList < Rectangle > ();
     car = new Rectangle(WIDTH / 2 - 70, HEIGHT - 100, width, height);
     space = 800;
-    speed = 10;
+    speed = 11;
     addKeyListener(this);
     setFocusable(true);
     addocars(true);
@@ -81,16 +80,20 @@ public class work extends JPanel implements ActionListener, KeyListener {
     }
   }
   public void addocars(boolean first) {
-    int positionx = rand.nextInt() % 4;
+    int positionx = rand.nextInt() % 7;
     int x = 0;
     int y = 0;
     int Width = width;
     int Height = height;
     switch (positionx) {
-    case 0 -> x = WIDTH / 2 - 40; //cars will be appearing either from right side or from left side
+      //cars will be appearing either from right side or from left side
+    case 0 -> x = WIDTH / 2 - 40;
+    case 4 -> x = WIDTH / 2 - 30;
     case 1 -> x = WIDTH / 2 - 70;
     case 2 -> x = WIDTH / 2 + 60;
     case 3 -> x = WIDTH / 2 + 100;
+    case 5 -> x = WIDTH / 2 + 70;
+    case 6 -> x = WIDTH / 2 + 80;
     default -> {
       x = WIDTH / 2 - 50;
     }
@@ -174,7 +177,7 @@ public class work extends JPanel implements ActionListener, KeyListener {
 
   //moving up
   public void moveup() {
-    if (car.y == 15) {
+    if (car.y == 20) {
       JOptionPane.showMessageDialog(null, "YOU WON!");
       System.exit(0);
     }
@@ -217,11 +220,6 @@ public class work extends JPanel implements ActionListener, KeyListener {
   }
 
   @Override
-  public void keyPressed(KeyEvent e) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-  }
-
-  @Override
   public void keyReleased(KeyEvent e) {
     //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     int key = e.getKeyCode();
@@ -233,5 +231,8 @@ public class work extends JPanel implements ActionListener, KeyListener {
     default -> {}
     }
   }
-
+  @Override
+  public void keyPressed(KeyEvent e) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
 }
