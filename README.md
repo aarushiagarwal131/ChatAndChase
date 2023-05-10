@@ -39,6 +39,6 @@ This project requires Java 8 or higher and the following libraries:
 - `java.net`
 - `java.io`
 
-##Video Link
+## Video Link
 
 https://www.awesomescreenshot.com/video/16749192?key=5b1fd65a8967e8760e47b5d818d823f0
